@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>bruh. what did the AI actually say?</title>
+<meta name="description" content="bruh turns AI slop into human speak. Your AI wrote 10 pages. bruh tells you what it said. Open source, MIT.">
+<meta property="og:title" content="bruh. your AI wrote 10 pages. here's what it said.">
+<meta property="og:description" content="Open-source CLI + agent skill that turns AI slop into what it actually says.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤨</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<nav><div>bruh.is</div><div class="links"><a href="#install">install</a><a href="#faq">faq</a><a href="https://github.com/TheCraigHewitt/bruh">github</a></div></nav>
+
+<header class="hero">
+  <h1>bruh<span>.</span></h1>
+  <h2>your AI wrote 10 pages. bruh tells you what it said.</h2>
+  <p>caveman makes the AI talk less. bruh makes <em>you</em> understand what it already said. open source. zero deps. mildly judgmental.</p>
+  <a class="btn" href="#install">get bruh</a>
+  <a class="btn alt" href="https://github.com/TheCraigHewitt/bruh">★ github</a>
+</header>
+
+<section id="demo">
+  <h3>before / after</h3>
+  <div class="cmp">
+    <div class="card"><h4>the slop · 77 words</h4>
+      <p>In today's rapidly evolving digital landscape, it is increasingly important for organizations to leverage a holistic, data-driven content strategy that unlocks synergies across channels. By committing to a consistent publishing cadence and amplifying our owned media footprint, we can drive meaningful engagement and position ourselves for sustainable growth. To operationalize this vision, we recommend onboarding a best-in-class automation platform at a cost of $4,000, pending approval by Friday. Early benchmarks suggest a 300% uplift in qualified leads.</p></div>
+    <div class="card good"><h4>bruh · 29 words</h4>
+      <p><strong>bruh, the whole thing is:</strong> post more and send more emails.</p>
+      <p><strong>They want:</strong> you to approve a $4,000 tool by Friday.</p>
+      <p><strong>Double-check:</strong> "300% uplift". no source. looks made up.</p></div>
+  </div>
+  <p class="note">example written by hand to show the format. not real model output, not a benchmark.</p>
+</section>
+
+<section id="install">
+  <h3>install <small>(10 seconds, no deps)</small></h3>
+  <div class="code"><button class="copy">copy</button><code>export ANTHROPIC_API_KEY=sk-ant-...   # or OPENAI_API_KEY
+npx bruh report.md</code></div>
+  <p class="note"><code>npx bruh</code> works once the package is on npm (not yet). until then: <code>git clone https://github.com/TheCraigHewitt/bruh &amp;&amp; node bruh/bin/bruh.js report.md</code></p>
+  <p>as an agent skill (claude code, codex, cursor):</p>
+  <div class="code"><button class="copy">copy</button><code>git clone https://github.com/TheCraigHewitt/bruh
+mkdir -p ~/.claude/skills &amp;&amp; cp -r bruh/skills/bruh ~/.claude/skills/</code></div>
+  <p>then say <code>bruh this</code> and paste the thing.</p>
+</section>
+
+<section id="try">
+  <h3>try it <small>(it's a CLI, bruh)</small></h3>
+  <p>this site is static, so no model calls here and no key to leak. bruh runs on your machine with your key:</p>
+  <div class="code"><button class="copy">copy</button><code>npx bruh report.md                 <span class="c"># a file</span>
+npx bruh https://some.blog/post     <span class="c"># a URL</span>
+pbpaste | npx bruh --full           <span class="c"># whatever you just copied</span>
+npx bruh --clipboard --roast        <span class="c"># macOS, feeling mean</span></code></div>
+</section>
+
+<section id="modes">
+  <h3>modes</h3>
+  <div class="modes">
+    <div class="card"><p><code>bruh</code></p><p>the point and the ask. two lines. you're busy.</p></div>
+    <div class="card"><p><code>--full</code></p><p>point, ask, fluff, double-check.</p></div>
+    <div class="card"><p><code>--roast</code></p><p>full version, but funny. mean to the slop, never the person.</p></div>
+  </div>
+</section>
+
+<section id="honest">
+  <h3>does it work? <small>honest section</small></h3>
+  <ul class="honest">
+    <li>it's a prompt + a thin CLI. it's as good as the model you point it at.</li>
+    <li>no benchmarks yet. we're not making up a number for a banner.</li>
+    <li>summaries are lossy. contracts, medical, money: read the real thing.</li>
+    <li>it flags "looks made up". it doesn't fact-check. it doesn't browse.</li>
+    <li>your text goes to the model provider you choose. don't pipe in secrets.</li>
+  </ul>
+</section>
+
+<section id="faq">
+  <h3>faq</h3>
+  <details><summary>is this just "summarize"?</summary><p>a summary says what's there. bruh also says what they want from you, what's padding, and what smells made up. also it says "bruh."</p></details>
+  <details><summary>will it hurt my coworker's feelings?</summary><p>roast mode roasts the slop, never the person. their AI has it coming.</p></details>
+  <details><summary>is it the reverse of caveman?</summary><p>spiritually. caveman makes the AI say less. bruh helps with what was already said. use both. take a nap.</p></details>
+  <details><summary>is it free?</summary><p>MIT licensed, free forever. you bring your own API key.</p></details>
+  <details><summary>why are the error messages rude?</summary><p>not rude. honest. <code>input is empty, bruh.</code></p></details>
+</section>
+
+<footer>MIT · <a href="https://github.com/TheCraigHewitt/bruh">github.com/TheCraigHewitt/bruh</a> · don't use it to write more slop</footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

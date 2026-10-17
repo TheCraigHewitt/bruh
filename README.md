@@ -27,8 +27,8 @@ You don't have time. bruh does.
 
 <table>
 <tr>
-<th width="50%">The slop · 94 words</th>
-<th width="50%">bruh · 24 words</th>
+<th width="50%">The slop · 77 words</th>
+<th width="50%">bruh · 29 words</th>
 </tr>
 <tr>
 <td valign="top">
