@@ -38,12 +38,12 @@
 <section id="install">
   <h3>install <small>(10 seconds, no deps)</small></h3>
   <div class="code"><button class="copy">copy</button><code>export ANTHROPIC_API_KEY=sk-ant-...   # or OPENAI_API_KEY
-npx bruh report.md
+npx @thecraighewitt/bruh report.md
 
 # no key? run it on your laptop. nothing leaves your machine.
 ollama pull llama3.2
-npx bruh report.md --provider ollama</code></div>
-  <p class="note"><code>npx bruh</code> works once the package is on npm (not yet). until then: <code>git clone https://github.com/TheCraigHewitt/bruh &amp;&amp; node bruh/bin/bruh.js report.md</code></p>
+npx @thecraighewitt/bruh report.md --provider ollama</code></div>
+  <p class="note">global command instead? <code>npm i -g @thecraighewitt/bruh</code>, then just <code>bruh report.md</code>. or from a clone: <code>git clone https://github.com/TheCraigHewitt/bruh &amp;&amp; node bruh/bin/bruh.js report.md</code></p>
   <p>as an agent skill (claude code, codex, cursor):</p>
   <div class="code"><button class="copy">copy</button><code>git clone https://github.com/TheCraigHewitt/bruh
 mkdir -p ~/.claude/skills &amp;&amp; cp -r bruh/skills/bruh ~/.claude/skills/</code></div>
@@ -53,10 +53,10 @@ mkdir -p ~/.claude/skills &amp;&amp; cp -r bruh/skills/bruh ~/.claude/skills/</c
 <section id="try">
   <h3>try it <small>(it's a CLI, bruh)</small></h3>
   <p>this site is static, so no model calls here and no key to leak. bruh runs on your machine with your key:</p>
-  <div class="code"><button class="copy">copy</button><code>npx bruh report.md                 <span class="c"># a file</span>
-npx bruh https://some.blog/post     <span class="c"># a URL</span>
-pbpaste | npx bruh --full           <span class="c"># whatever you just copied</span>
-npx bruh --clipboard --roast        <span class="c"># macOS, feeling mean</span></code></div>
+  <div class="code"><button class="copy">copy</button><code>npx @thecraighewitt/bruh report.md                 <span class="c"># a file</span>
+npx @thecraighewitt/bruh https://some.blog/post     <span class="c"># a URL</span>
+pbpaste | npx @thecraighewitt/bruh --full           <span class="c"># whatever you just copied</span>
+npx @thecraighewitt/bruh --clipboard --roast        <span class="c"># macOS, feeling mean</span></code></div>
 </section>
 
 <section id="modes">

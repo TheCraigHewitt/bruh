@@ -6,7 +6,7 @@ document.querySelectorAll('.mode').forEach((b) => b.onclick = () => {
   document.querySelectorAll('.mode').forEach((x) => { x.classList.toggle('on', x === b); x.setAttribute('aria-checked', x === b); });
 });
 $('text').oninput = () => { $('count').textContent = `${$('text').value.length.toLocaleString()} / 60,000`; };
-$('npx').onclick = () => navigator.clipboard?.writeText('npx bruh');
+$('npx').onclick = () => navigator.clipboard?.writeText('npx @thecraighewitt/bruh');
 
 const sentences = (s) => (s ? (s.match(/[^.!?]+[.!?]+(\s|$)|[^.!?]+$/g) || []).length : 0);
 
