@@ -19,6 +19,23 @@ Paste in the wall of text. Get back:
 
 ## Install
 
+### CLI
+
+Needs Node 18+ and an API key (`ANTHROPIC_API_KEY` by default, or `OPENAI_API_KEY`).
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+npx bruh report.md                  # short version of a file
+npx bruh https://example.com/post   # a URL
+pbpaste | npx bruh --full           # stdin
+npx bruh --clipboard --roast        # clipboard (macOS)
+npx bruh doc.txt --model gpt-4o --provider openai
+```
+
+Inputs over 400k characters are truncated, with a warning. The CLI uses `skills/bruh/SKILL.md` as its system prompt, so the skill and the CLI behave the same.
+
+### Skill
+
 As a skill (Claude Code, Codex, Cursor, anything that reads Agent Skills):
 
 ```bash
@@ -44,7 +61,7 @@ Then say: `bruh this` and paste the text, or point it at a file.
 ## Roadmap
 
 - [x] Skill
-- [ ] CLI: `npx bruh <file|url>` and clipboard support
+- [x] CLI: `npx bruh <file|url>` and clipboard support
 - [ ] Web paste box at bruh.is with a shareable "this 10-page doc is 3 sentences" card
 - [ ] Slack and Gmail integration that bruhs things before you see them
 - [ ] Team digests and a slop score
