@@ -62,7 +62,7 @@ Then say: `bruh this` and paste the text, or point it at a file.
 
 - [x] Skill
 - [x] CLI: `npx bruh <file|url>` and clipboard support
-- [ ] Web paste box at bruh.is with a shareable "this 10-page doc is 3 sentences" card
+- [x] Web paste box at bruh.is with a shareable "this 10-page doc is 3 sentences" card
 - [ ] Slack and Gmail integration that bruhs things before you see them
 - [ ] Team digests and a slop score
 

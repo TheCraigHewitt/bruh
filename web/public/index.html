@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bruh. what does this actually say?</title>
+<meta name="description" content="Paste the AI slop. Get what it actually says.">
+<meta property="og:title" content="bruh. what does this actually say?">
+<meta property="og:description" content="Paste the AI slop. Get what it actually says.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤨</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>bruh<span>.</span></h1>
+    <p class="tag">paste the ai slop. get what it actually says.</p>
+  </header>
+
+  <section id="input">
+    <textarea id="text" placeholder="paste the 10-page doc, the 40-message thread, the 3,000-word &quot;strategy&quot;…" maxlength="60000" aria-label="text to bruh"></textarea>
+    <input id="url" type="url" placeholder="or a url (we'll fetch it)" aria-label="url">
+    <div class="row">
+      <div class="modes" role="radiogroup" aria-label="mode">
+        <button class="mode on" data-mode="short" role="radio" aria-checked="true">short</button>
+        <button class="mode" data-mode="full" role="radio" aria-checked="false">full</button>
+        <button class="mode" data-mode="roast" role="radio" aria-checked="false">roast 🔥</button>
+      </div>
+      <span id="count">0 / 60,000</span>
+    </div>
+    <button id="go">bruh this</button>
+    <p id="err" role="alert" hidden></p>
+  </section>
+
+  <section id="result" hidden>
+    <div id="card">
+      <div class="head" id="headline"></div>
+      <div class="block"><b>the point</b><p id="r-point"></p></div>
+      <div class="block"><b>they want</b><p id="r-ask"></p></div>
+      <div class="block" id="b-fluff"><b>fluff</b><p id="r-fluff"></p></div>
+      <div class="block" id="b-check"><b>double-check</b><p id="r-check"></p></div>
+      <div class="brand">bruh.is</div>
+    </div>
+    <div class="actions">
+      <button id="copy">copy text</button>
+      <button id="link">copy link</button>
+      <button id="png">download image</button>
+      <button id="again" class="ghost">again</button>
+    </div>
+  </section>
+
+  <footer>
+    <code id="npx">npx bruh report.md</code>
+    <p>open source, MIT · <a href="https://github.com/TheCraigHewitt/bruh">github.com/TheCraigHewitt/bruh</a></p>
+    <p class="small">we send your text to an AI to answer. don't paste secrets.</p>
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
