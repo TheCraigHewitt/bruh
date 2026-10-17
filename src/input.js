@@ -35,7 +35,7 @@ async function readStdin() {
 
 async function fetchUrl(url) {
   const res = await fetch(url, { headers: { 'user-agent': 'bruh-cli' }, redirect: 'follow' });
-  if (!res.ok) throw new Error(`couldn't fetch ${url} (${res.status})`);
+  if (!res.ok) throw new Error(`couldn't fetch ${url} (${res.status}). the internet said no`);
   const body = await res.text();
   const type = res.headers.get('content-type') || '';
   return /html/i.test(type) || /^\s*<(!doctype|html)/i.test(body) ? htmlToText(body) : body;
@@ -44,7 +44,7 @@ async function fetchUrl(url) {
 export async function readInput(opts, { stdinIsTTY = process.stdin.isTTY } = {}) {
   let text;
   if (opts.clipboard) {
-    if (process.platform !== 'darwin') throw new Error('--clipboard only works on macOS for now (needs pbpaste). pipe it in instead.');
+    if (process.platform !== 'darwin') throw new Error('--clipboard only works on macOS for now (needs pbpaste). pipe it in instead, bruh.');
     text = execFileSync('pbpaste', { encoding: 'utf8' });
   } else if (opts.source && isUrl(opts.source)) text = await fetchUrl(opts.source);
   else if (opts.source && opts.source !== '-') {
@@ -54,7 +54,7 @@ export async function readInput(opts, { stdinIsTTY = process.stdin.isTTY } = {})
       throw new Error(`can't read ${opts.source}: ${e.code || e.message}`);
     }
   } else if (!stdinIsTTY || opts.source === '-') text = await readStdin();
-  else throw new Error('nothing to read. give me a file, a URL, pipe something in, or use --clipboard. (bruh --help)');
-  if (!text || !text.trim()) throw new Error('input is empty, bruh.');
+  else throw new Error('nothing to read. give me a file, a URL, pipe something in, or use --clipboard. i can\'t summarize vibes. (bruh --help)');
+  if (!text || !text.trim()) throw new Error('input is empty, bruh. nothing to unslop.');
   return text;
 }

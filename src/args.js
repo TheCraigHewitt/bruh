@@ -1,4 +1,5 @@
-export const HELP = `bruh - turns AI slop into human speak
+export const HELP = `bruh - turns AI slop into human speak.
+your coworker's AI wrote 10 pages. bruh tells you what it said.
 
 Usage:
   bruh <file|url>        read a file or URL
@@ -6,9 +7,9 @@ Usage:
   bruh --clipboard       read from the clipboard (macOS: pbpaste)
 
 Modes:
-  (default)   short: the point and the ask
-  --full      all four sections
-  --roast     the full version, but funny
+  (default)   short: the point and the ask. two lines. you're busy.
+  --full      all four sections: point, ask, fluff, double-check
+  --roast     the full version, but mean to the slop (never the person)
 
 Options:
   -m, --model <name>     model to use (default: claude-sonnet-4-5 / gpt-4o)
@@ -18,6 +19,13 @@ Options:
   -v, --version          show version
 
 Env: ANTHROPIC_API_KEY (default) or OPENAI_API_KEY
+
+examples:
+  bruh strategy.md
+  pbpaste | bruh --roast
+  bruh https://some.blog/ten-thousand-words --full
+
+https://bruh.is
 `;
 
 export function parseArgs(argv) {
@@ -31,17 +39,17 @@ export function parseArgs(argv) {
     else if (a === '-v' || a === '--version') o.version = true;
     else if (a === '-m' || a === '--model' || a === '--provider') {
       const v = argv[++i];
-      if (!v || v.startsWith('-')) throw new Error(`${a} needs a value`);
+      if (!v || v.startsWith('-')) throw new Error(`${a} needs a value, bruh`);
       if (a === '--provider') {
-        if (!['anthropic', 'openai'].includes(v)) throw new Error('provider must be anthropic or openai');
+        if (!['anthropic', 'openai'].includes(v)) throw new Error('provider must be anthropic or openai. those are the only two. bruh.');
         o.provider = v;
       } else o.model = v;
     } else if (a.startsWith('--model=')) o.model = a.slice(8);
     else if (a.startsWith('--provider=')) {
       o.provider = a.slice(11);
-      if (!['anthropic', 'openai'].includes(o.provider)) throw new Error('provider must be anthropic or openai');
-    } else if (a.startsWith('-') && a !== '-') throw new Error(`unknown option ${a}`);
-    else if (o.source) throw new Error('only one file or URL at a time');
+      if (!['anthropic', 'openai'].includes(o.provider)) throw new Error('provider must be anthropic or openai. those are the only two. bruh.');
+    } else if (a.startsWith('-') && a !== '-') throw new Error(`unknown option ${a}. try bruh --help`);
+    else if (o.source) throw new Error('one file or URL at a time. bruh is good, not magic.');
     else o.source = a;
   }
   return o;

@@ -13,7 +13,7 @@ export async function main(argv) {
   const { provider, key } = pickProvider(process.env, opts.provider);
   const raw = await readInput(opts);
   const { text, truncated } = truncate(raw);
-  if (truncated) console.error(`bruh: input is huge (${raw.length} chars). only reading the first ${text.length}. the rest got skipped.`);
+  if (truncated) console.error(`bruh: this thing is huge (${raw.length} chars). only reading the first ${text.length}. the rest got skipped, which, honestly, is probably fine.`);
   const system = await loadSystemPrompt(opts.mode);
   console.log(await ask({ provider, key, model: opts.model, system, text }));
 }
