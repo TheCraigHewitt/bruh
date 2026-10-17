@@ -38,7 +38,11 @@
 <section id="install">
   <h3>install <small>(10 seconds, no deps)</small></h3>
   <div class="code"><button class="copy">copy</button><code>export ANTHROPIC_API_KEY=sk-ant-...   # or OPENAI_API_KEY
-npx bruh report.md</code></div>
+npx bruh report.md
+
+# no key? run it on your laptop. nothing leaves your machine.
+ollama pull llama3.2
+npx bruh report.md --provider ollama</code></div>
   <p class="note"><code>npx bruh</code> works once the package is on npm (not yet). until then: <code>git clone https://github.com/TheCraigHewitt/bruh &amp;&amp; node bruh/bin/bruh.js report.md</code></p>
   <p>as an agent skill (claude code, codex, cursor):</p>
   <div class="code"><button class="copy">copy</button><code>git clone https://github.com/TheCraigHewitt/bruh

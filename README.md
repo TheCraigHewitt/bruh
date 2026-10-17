@@ -66,6 +66,7 @@ npx bruh https://example.com/post    # a URL
 pbpaste | npx bruh --full            # stdin
 npx bruh --clipboard --roast         # clipboard (macOS)
 npx bruh doc.txt --model gpt-4o --provider openai
+npx bruh doc.txt --provider ollama   # local, no key (see below)
 ```
 
 Needs Node 18+ and your own API key. Inputs over 400k characters get truncated, with a warning.
@@ -93,6 +94,22 @@ What you get in full mode:
 3. **Fluff.** What you can skip, with a rough share ("8 of 10 pages").
 4. **Double-check.** Unsourced stats, made-up quotes, vague claims, contradictions.
 
+## Runs on your laptop
+
+No API key? No problem. bruh talks to [Ollama](https://ollama.com), so the whole thing runs on your machine and **nothing leaves it**.
+
+```bash
+ollama pull llama3.2
+npx bruh report.md --provider ollama          # default model: llama3.2
+npx bruh report.md --provider ollama -m qwen2.5:7b
+```
+
+- Auto-detect order: `ANTHROPIC_API_KEY`, then `OPENAI_API_KEY`, then a running Ollama. If you have no keys and Ollama is up, bruh just uses it.
+- Custom host: `OLLAMA_HOST=http://my-mac-studio:11434`. Default is `http://localhost:11434`.
+- Model not pulled or Ollama not running? bruh tells you the exact command to fix it.
+
+**Honest note:** small local models (3B-8B) are fine for the short and `--full` modes on normal-length docs. They're worse than big hosted models at long documents and at catching made-up stats. Use a bigger model if it matters. As a skill inside your agent, bruh uses whatever model the agent already runs.
+
 ## Does it work? What bruh can't do
 
 Honest section. bruh is a prompt and a thin CLI. It's as good as the model you point it at.
@@ -101,7 +118,7 @@ Honest section. bruh is a prompt and a thin CLI. It's as good as the model you p
 - **It can miss things.** A summary is lossy by definition. For contracts, medical, legal, or money you actually have to read, read it.
 - **It flags "looks made up", it doesn't fact-check.** bruh doesn't browse. It tells you which claims have no source in the text, not whether they're true.
 - **Garbage in, honest garbage out.** If the text doesn't say what it wants, bruh says it can't tell. That's a finding, not a bug.
-- **It sends your text to a model.** Whatever provider you pick sees the document. Don't pipe in anything you wouldn't paste into that provider.
+- **It sends your text to a model.** Whatever provider you pick sees the document (with `--provider ollama`, that's your own machine). Don't pipe in anything you wouldn't paste into that provider.
 - **Live model calls untested in CI.** The tests cover arg parsing, input handling, and the prompt. The end-to-end model call is on you and your key.
 
 The rules are baked into the skill: exact numbers, no invented content, no manufactured slop. If the doc is actually good, bruh says so.

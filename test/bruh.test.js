@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseArgs } from '../src/args.js';
 import { htmlToText, truncate, isUrl, readInput } from '../src/input.js';
-import { pickProvider, loadSystemPrompt } from '../src/llm.js';
+import { pickProvider, resolveProvider, ask, ollamaHost, loadSystemPrompt } from '../src/llm.js';
 
 test('parseArgs defaults to short', () => {
   assert.equal(parseArgs(['a.txt']).mode, 'short');
@@ -59,4 +59,42 @@ test('system prompt uses SKILL.md without frontmatter plus mode', async () => {
   assert.ok(p.includes('bruh, the whole thing is:'));
   assert.ok(!p.startsWith('---'));
   assert.ok(p.includes('--roast'));
+});
+
+test('parseArgs accepts ollama provider', () => {
+  assert.equal(parseArgs(['--provider', 'ollama']).provider, 'ollama');
+});
+test('no-key error mentions ollama', () => {
+  assert.throws(() => pickProvider({}), /ollama/);
+});
+test('ollamaHost default, env, and scheme fixup', () => {
+  assert.equal(ollamaHost({}), 'http://localhost:11434');
+  assert.equal(ollamaHost({ OLLAMA_HOST: 'box:1234/' }), 'http://box:1234');
+});
+test('resolveProvider: keys beat ollama; ollama used when reachable; else friendly error', async () => {
+  const up = async () => ({ ok: true });
+  const down = async () => { throw new Error('ECONNREFUSED'); };
+  assert.equal((await resolveProvider({ OPENAI_API_KEY: 'k' }, null, up)).provider, 'openai');
+  assert.equal((await resolveProvider({}, null, up)).provider, 'ollama');
+  await assert.rejects(resolveProvider({}, null, down), /ollama pull/);
+  assert.equal((await resolveProvider({}, 'ollama', down)).provider, 'ollama');
+});
+test('ask ollama: posts to /api/chat with stream false and system prompt', async () => {
+  let seen;
+  const f = async (url, init) => { seen = { url, body: JSON.parse(init.body) }; return { ok: true, status: 200, json: async () => ({ message: { content: ' hi ' } }) }; };
+  const out = await ask({ provider: 'ollama', host: 'http://h:1', system: 'SYS', text: 'T' }, f);
+  assert.equal(out, 'hi');
+  assert.equal(seen.url, 'http://h:1/api/chat');
+  assert.equal(seen.body.stream, false);
+  assert.equal(seen.body.model, 'llama3.2');
+  assert.equal(seen.body.messages[0].content, 'SYS');
+  const f2 = async (u, i) => { seen = JSON.parse(i.body); return { ok: true, json: async () => ({ message: { content: 'x' } }) }; };
+  await ask({ provider: 'ollama', host: 'http://h:1', model: 'qwen2.5:3b', system: 's', text: 't' }, f2);
+  assert.equal(seen.model, 'qwen2.5:3b');
+});
+test('ask ollama: not running and model missing errors', async () => {
+  const down = async () => { throw new Error('ECONNREFUSED'); };
+  await assert.rejects(ask({ provider: 'ollama', host: 'http://h:1', system: 's', text: 't' }, down), /ollama serve/);
+  const missing = async () => ({ ok: false, status: 404, json: async () => ({ error: "model 'llama3.2' not found" }) });
+  await assert.rejects(ask({ provider: 'ollama', host: 'http://h:1', system: 's', text: 't' }, missing), /ollama pull llama3.2/);
 });
