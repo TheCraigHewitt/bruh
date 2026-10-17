@@ -6,7 +6,7 @@
 
 **Caveman makes the AI talk less. bruh makes *you* understand what it already said.**
 
-[![npm](https://img.shields.io/npm/v/@thecraighewitt/bruh?style=flat-square&color=black)](https://www.npmjs.com/package/@thecraighewitt/bruh)
+[![npm](https://img.shields.io/npm/v/bruh-ai?style=flat-square&color=black)](https://www.npmjs.com/package/bruh-ai)
 ![license](https://img.shields.io/badge/license-MIT-black?style=flat-square)
 ![node](https://img.shields.io/badge/node-18%2B-black?style=flat-square)
 ![deps](https://img.shields.io/badge/dependencies-0-black?style=flat-square)
@@ -56,18 +56,18 @@ Same text. Now you know what's being asked and what to be suspicious of. Took fo
 ```bash
 # the CLI: no install, no deps
 export ANTHROPIC_API_KEY=sk-ant-...      # or OPENAI_API_KEY
-npx @thecraighewitt/bruh report.md
+npx bruh-ai report.md
 ```
 
-> prefer a global command? `npm i -g @thecraighewitt/bruh`, then just run `bruh report.md`. Or run from a clone: `git clone https://github.com/TheCraigHewitt/bruh && cd bruh && node bin/bruh.js report.md`.
+> prefer a global command? `npm i -g bruh-ai`, then just run `bruh report.md`. Or run from a clone: `git clone https://github.com/TheCraigHewitt/bruh && cd bruh && node bin/bruh.js report.md`.
 
 ```bash
-npx @thecraighewitt/bruh report.md                   # a file
-npx @thecraighewitt/bruh https://example.com/post    # a URL
-pbpaste | npx @thecraighewitt/bruh --full            # stdin
-npx @thecraighewitt/bruh --clipboard --roast         # clipboard (macOS)
-npx @thecraighewitt/bruh doc.txt --model gpt-4o --provider openai
-npx @thecraighewitt/bruh doc.txt --provider ollama   # local, no key (see below)
+npx bruh-ai report.md                   # a file
+npx bruh-ai https://example.com/post    # a URL
+pbpaste | npx bruh-ai --full            # stdin
+npx bruh-ai --clipboard --roast         # clipboard (macOS)
+npx bruh-ai doc.txt --model gpt-4o --provider openai
+npx bruh-ai doc.txt --provider ollama   # local, no key (see below)
 ```
 
 Needs Node 18+ and your own API key. Inputs over 400k characters get truncated, with a warning.
@@ -101,8 +101,8 @@ No API key? No problem. bruh talks to [Ollama](https://ollama.com), so the whole
 
 ```bash
 ollama pull llama3.2
-npx @thecraighewitt/bruh report.md --provider ollama          # default model: llama3.2
-npx @thecraighewitt/bruh report.md --provider ollama -m qwen2.5:7b
+npx bruh-ai report.md --provider ollama          # default model: llama3.2
+npx bruh-ai report.md --provider ollama -m qwen2.5:7b
 ```
 
 - Auto-detect order: `ANTHROPIC_API_KEY`, then `OPENAI_API_KEY`, then a running Ollama. If you have no keys and Ollama is up, bruh just uses it.
@@ -152,7 +152,7 @@ Yes. bruh says "the whole thing is: install it and run it on your homework."
 - [x] Skill
 - [x] CLI: file, URL, stdin, clipboard
 - [x] Static site on GitHub Pages (`docs/`)
-- [x] published to npm as `@thecraighewitt/bruh` (unscoped `bruh-ai` later)
+- [x] published to npm as `bruh-ai` (command stays `bruh`)
 - [ ] local models (Ollama / any OpenAI-compatible endpoint)
 - [ ] Slack and Gmail: bruh it before you see it
 - [ ] team digests

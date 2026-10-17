@@ -1,5 +1,5 @@
 {
-  "name": "@thecraighewitt/bruh",
+  "name": "bruh-ai",
   "version": "0.1.0",
   "description": "Turns AI slop into human speak. Tells you what that 10-page doc actually says.",
   "type": "module",
